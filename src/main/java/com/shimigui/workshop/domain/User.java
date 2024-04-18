@@ -1,6 +1,6 @@
 package com.shimigui.workshop.domain;
 
-public class User extends EntityWithId<User> {
+public class User extends Entity<String, User> {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
