@@ -3,8 +3,11 @@ package com.shimigui.workshop.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
+import org.springframework.data.annotation.Id;
+
 public class Entity<ID, E extends Entity<ID, E>> implements Serializable {
 	private static final long serialVersionUID = 1L;
+	@Id
 	protected ID id;
 
 	public ID getId() {

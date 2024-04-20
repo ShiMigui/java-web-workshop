@@ -1,5 +1,8 @@
 package com.shimigui.workshop.domain;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "user")
 public class User extends Entity<String, User> {
 	private static final long serialVersionUID = 1L;
 
