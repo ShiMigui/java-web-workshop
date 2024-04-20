@@ -5,16 +5,17 @@ import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 
-public class Entity<ID, E extends Entity<ID, E>> implements Serializable {
+public class Entity<E extends Entity<E>> implements Serializable {
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	protected ID id;
+	protected String id;
 
-	public ID getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(ID id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -30,7 +31,7 @@ public class Entity<ID, E extends Entity<ID, E>> implements Serializable {
 			return false;
 		if (this == obj)
 			return true;
-		E other = (E) obj;
+		Entity<E> other = (Entity<E>) obj;
 		return id.equals(other.id);
 	}
 }

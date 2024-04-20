@@ -1,6 +1,6 @@
 package com.shimigui.workshop.resources;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shimigui.workshop.domain.User;
+import com.shimigui.workshop.dto.UserDTO;
 import com.shimigui.workshop.services.UserService;
 
 @RestController
@@ -18,13 +18,8 @@ public class UserResource {
 	private UserService service;
 
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
-//		List<User> list = new ArrayList<>();
-//
-//		list.add(new User("asasdasdfaf", "Miguel Nascimento dos Santos", "miguel.nasto@gmail.com"));
-//		list.add(new User("asasdasdfaf", "Maria Green", "maria@gmail.com"));
-//		list.add(new User("asasdasdfaf", "Alex Brown", "alex@gmail.com"));
-
-		return ResponseEntity.ok().body(service.findAll());
+	public ResponseEntity<Stream<UserDTO>> findAll() {
+		Stream<UserDTO> list = service.findAll().stream().map(x -> new UserDTO(x));
+		return ResponseEntity.ok().body(list);
 	}
 }

@@ -1,21 +1,23 @@
-package com.shimigui.workshop.domain;
+package com.shimigui.workshop.dto;
 
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.shimigui.workshop.domain.Entity;
+import com.shimigui.workshop.domain.User;
 
-@Document(collection = "user")
-public class User extends Entity<User> {
+public class UserDTO extends Entity<User> {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
 	private String email;
 
-	public User() {
-	}
-
-	public User(String id, String name, String email) {
-		setId(id);
+	public UserDTO(String name, String email) {
 		setName(name);
 		setEmail(email);
+	}
+
+	public UserDTO(User obj) {
+		setId(obj.getId());
+		setName(obj.getName());
+		setEmail(obj.getEmail());
 	}
 
 	public String getName() {
@@ -33,5 +35,4 @@ public class User extends Entity<User> {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 }
