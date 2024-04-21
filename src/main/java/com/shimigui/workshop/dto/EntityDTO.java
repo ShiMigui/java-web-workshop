@@ -9,7 +9,6 @@ public abstract class EntityDTO<E extends Entity<E>> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	protected String id;
-	protected E reference;
 
 	public String getId() {
 		return id;
@@ -22,5 +21,5 @@ public abstract class EntityDTO<E extends Entity<E>> implements Serializable {
 	@JsonIgnore
 	public abstract E getReference();
 	
-	public abstract void setRefenrece(E obj);
+	public abstract void setReference(E obj);
 }

@@ -53,7 +53,7 @@ public class UserResource {
 	public ResponseEntity<UserDTO> update(@RequestBody UserDTO dto, @PathVariable String id){
 		User ref = dto.getReference();
 		ref.setId(id);
-		dto.setRefenrece(service.update(ref));
+		dto.setReference(service.update(ref));
 		
 		return ResponseEntity.ok(dto);
 	}

@@ -14,7 +14,7 @@ public class UserDTO extends EntityDTO<User> {
 	}
 
 	public UserDTO(User obj) {
-		setRefenrece(obj);
+		setReference(obj);
 	}
 
 	public String getName() {
@@ -34,8 +34,7 @@ public class UserDTO extends EntityDTO<User> {
 	}
 
 	@Override
-	public void setRefenrece(User obj) {
-		this.reference = obj;
+	public void setReference(User obj) {
 		setId(obj.getId());
 		setName(obj.getName());
 		setEmail(obj.getEmail());
@@ -43,8 +42,6 @@ public class UserDTO extends EntityDTO<User> {
 
 	@Override
 	public User getReference() {
-		if(reference == null) 
-			reference = new User(getId(), getName(), getEmail());
-		return this.reference;
+		return new User(getId(), getName(), getEmail());
 	}
 }

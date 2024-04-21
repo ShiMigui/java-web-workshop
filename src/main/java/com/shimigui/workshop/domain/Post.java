@@ -4,19 +4,21 @@ import java.time.Instant;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.shimigui.workshop.dto.AuthorDTO;
+
 @Document
-public class Post extends Entity<Post>{
+public class Post extends Entity<Post> {
 	private static final long serialVersionUID = 1L;
 
 	private Instant date;
 	private String title;
 	private String body;
-	
-	private User author;
+
+	private AuthorDTO author = new AuthorDTO();
 
 	public Post() {
 	}
-	
+
 	public Post(String id, Instant date, String title, String body, User author) {
 		setId(id);
 		setDate(date);
@@ -49,11 +51,11 @@ public class Post extends Entity<Post>{
 		this.body = body.trim();
 	}
 
-	public User getAuthor() {
+	public AuthorDTO getAuthor() {
 		return author;
 	}
 
 	public void setAuthor(User author) {
-		this.author = author;
+		this.author.setReference(author);
 	}
 }
