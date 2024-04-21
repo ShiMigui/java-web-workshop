@@ -45,11 +45,21 @@ public class Instantiation implements CommandLineRunner {
 		users.saveAll(usersList);
 		
 		List<Post> postsList = new ArrayList<>();
-		postsList.add(new Post(null, Instant.parse("2005-09-06T15:32:00Z"), "Buenos días Colômbia!", "Tenho o prazer de contar que vim a Colômbia! Este país maravilhoso", u3));
-		postsList.add(new Post(null, Instant.parse("2024-04-20T10:15:00Z"), "Novo projeto de desenvolvimento", "Comecei um novo projeto de desenvolvimento em Java. Estou ansioso para compartilhar mais detalhes em breve!", u1));
-		postsList.add(new Post(null, Instant.parse("2024-04-19T14:30:00Z"), "Receita de bolo de chocolate", "Compartilhando minha receita favorita de bolo de chocolate. Espero que gostem!", u2));
-		postsList.add(new Post(null, Instant.parse("2024-09-08T12:45:00Z"), "Experiência colombiana", "Estou impressionado com a cultura e a hospitalidade colombianas. Uma experiência incrível até agora!", u3));
+		Post p1 = new Post(null, Instant.parse("2005-09-06T15:32:00Z"), "Buenos días Colômbia!", "Tenho o prazer de contar que vim a Colômbia! Este país maravilhoso", u3);
+		Post p2 = new Post(null, Instant.parse("2024-04-20T10:15:00Z"), "Novo projeto de desenvolvimento", "Comecei um novo projeto de desenvolvimento em Java. Estou ansioso para compartilhar mais detalhes em breve!", u1);
+		Post p3 = new Post(null, Instant.parse("2024-04-19T14:30:00Z"), "Receita de bolo de chocolate", "Compartilhando minha receita favorita de bolo de chocolate. Espero que gostem!", u2);
+		Post p4 = new Post(null, Instant.parse("2024-09-08T12:45:00Z"), "Experiência colombiana", "Estou impressionado com a cultura e a hospitalidade colombianas. Uma experiência incrível até agora!", u3);
+		postsList.add(p1);
+		postsList.add(p2);
+		postsList.add(p3);
+		postsList.add(p4);
 		posts.saveAll(postsList);
+		
+		u3.addPost(p1);
+		u1.addPost(p2);
+		u2.addPost(p3);
+		u3.addPost(p4);
+		users.saveAll(usersList);
 	}
 
 }
