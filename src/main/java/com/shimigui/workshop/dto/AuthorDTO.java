@@ -27,7 +27,7 @@ public class AuthorDTO extends EntityDTO<User> {
 	}
 
 	@Override
-	public User getReference() {
+	public User toReference() {
 		User user = new User();
 		user.setId(getId());
 		user.setName(getName());
@@ -36,6 +36,11 @@ public class AuthorDTO extends EntityDTO<User> {
 
 	@Override
 	public void setReference(User obj) {
+		setId(obj.getId());
+		setName(obj.getName());
+	}
+	
+	public void setReference(AuthorDTO obj) {
 		setId(obj.getId());
 		setName(obj.getName());
 	}

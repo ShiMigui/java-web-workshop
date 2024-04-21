@@ -41,7 +41,7 @@ public class UserDTO extends EntityDTO<User> {
 	}
 
 	@Override
-	public User getReference() {
+	public User toReference() {
 		return new User(getId(), getName(), getEmail());
 	}
 }

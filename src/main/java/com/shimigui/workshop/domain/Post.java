@@ -58,4 +58,8 @@ public class Post extends Entity<Post> {
 	public void setAuthor(User author) {
 		this.author.setReference(author);
 	}
+	
+	public void setAuthor(AuthorDTO author) {
+		this.author.setReference(author);
+	}
 }

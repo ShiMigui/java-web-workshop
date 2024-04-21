@@ -19,7 +19,7 @@ public abstract class EntityDTO<E extends Entity<E>> implements Serializable {
 	}
 	
 	@JsonIgnore
-	public abstract E getReference();
+	public abstract E toReference();
 	
 	public abstract void setReference(E obj);
 }

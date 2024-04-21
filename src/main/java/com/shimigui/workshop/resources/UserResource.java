@@ -40,7 +40,7 @@ public class UserResource {
 
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody UserDTO dto) {
-		User obj = service.insert(dto.getReference());
+		User obj = service.insert(dto.toReference());
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
@@ -53,7 +53,7 @@ public class UserResource {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> update(@RequestBody UserDTO dto, @PathVariable String id) {
-		User ref = dto.getReference();
+		User ref = dto.toReference();
 		ref.setId(id);
 		dto.setReference(service.update(ref));
 
