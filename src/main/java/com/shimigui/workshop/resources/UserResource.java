@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,12 +28,12 @@ public class UserResource {
 	@GetMapping
 	public ResponseEntity<Stream<UserDTO>> findAll() {
 		Stream<UserDTO> list = service.findAll().stream().map(x -> new UserDTO(x));
-		return ResponseEntity.ok().body(list);
+		return ResponseEntity.ok(list);
 	}
 
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<UserDTO> findById(@PathVariable String id) {
-		return ResponseEntity.ok().body(new UserDTO(service.findBy(id)));
+		return ResponseEntity.ok(new UserDTO(service.findBy(id)));
 	}
 	
 	@PostMapping
@@ -44,7 +45,16 @@ public class UserResource {
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
-		service.deleteById(id);
+		service.deleteBy(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<UserDTO> update(@RequestBody UserDTO dto, @PathVariable String id){
+		User ref = dto.getReference();
+		ref.setId(id);
+		dto.setRefenrece(service.update(ref));
+		
+		return ResponseEntity.ok(dto);
 	}
 }

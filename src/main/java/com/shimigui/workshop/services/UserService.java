@@ -26,8 +26,19 @@ public class UserService {
 		return repository.insert(obj);
 	}
 	
-	public void deleteById(String id) {
+	public void deleteBy(String id) {
 		findBy(id);
 		repository.deleteById(id);;
+	}
+	
+	public User update(User ref) {
+		User mirror = findBy(ref.getId());
+		updateData(mirror, ref);
+		return repository.save(mirror);
+	}
+
+	private void updateData(User mirror, User ref) {
+		mirror.setEmail(ref.getEmail());
+		mirror.setName(ref.getName());
 	}
 }
