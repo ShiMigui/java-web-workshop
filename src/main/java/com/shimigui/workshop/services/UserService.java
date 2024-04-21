@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.shimigui.workshop.domain.User;
 import com.shimigui.workshop.repositories.UserRepository;
+import com.shimigui.workshop.services.exceptions.NotFoundException;
 
 @Service
 public class UserService {
@@ -18,6 +19,6 @@ public class UserService {
 	}
 	
 	public User findBy(String id) {
-		return repository.findById(id).get();
+		return repository.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
 }
