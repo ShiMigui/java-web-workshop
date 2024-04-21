@@ -1,9 +1,8 @@
 package com.shimigui.workshop.dto;
 
-import com.shimigui.workshop.domain.Entity;
 import com.shimigui.workshop.domain.User;
 
-public class UserDTO extends Entity<User> {
+public class UserDTO extends EntityDTO<User> {
 	private static final long serialVersionUID = 1L;
 
 	private String name;
@@ -15,9 +14,7 @@ public class UserDTO extends Entity<User> {
 	}
 
 	public UserDTO(User obj) {
-		setId(obj.getId());
-		setName(obj.getName());
-		setEmail(obj.getEmail());
+		setRefenrece(obj);
 	}
 
 	public String getName() {
@@ -34,5 +31,20 @@ public class UserDTO extends Entity<User> {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public void setRefenrece(User obj) {
+		this.reference = obj;
+		setId(obj.getId());
+		setName(obj.getName());
+		setEmail(obj.getEmail());
+	}
+
+	@Override
+	public User getReference() {
+		if(reference == null) 
+			reference = new User(getId(), getName(), getEmail());
+		return this.reference;
 	}
 }
