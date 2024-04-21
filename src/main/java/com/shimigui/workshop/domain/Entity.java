@@ -31,7 +31,7 @@ public class Entity<E extends Entity<E>> implements Serializable {
 			return false;
 		if (this == obj)
 			return true;
-		Entity<E> other = (Entity<E>) obj;
+		E other = (E) obj;
 		return id.equals(other.id);
 	}
 }
