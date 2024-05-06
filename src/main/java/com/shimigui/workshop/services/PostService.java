@@ -1,5 +1,6 @@
 package com.shimigui.workshop.services;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,11 @@ public final class PostService extends EntityService<Post> {
 
 	public List<Post> findByTitle(String title){
 		return repository.findByTitleContainingIgnoreCase(title);
+	}
+	
+	public List<Post> fullSearch(String text, Instant minDate, Instant maxDate){
+//		maxDate= maxDate.plusSeconds((24 * 60 * 60));
+		return repository.fullSearch(text, minDate, maxDate);
 	}
 
 	@Override

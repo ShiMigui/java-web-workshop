@@ -1,5 +1,6 @@
 package com.shimigui.workshop.resources;
 
+import java.time.Instant;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ import com.shimigui.workshop.services.PostService;
 public class PostResource {
 	@Autowired
 	private PostService service;
+	
+	private static final Instant time = Instant.now().minusSeconds(31536000);
 
 	@GetMapping
 	public ResponseEntity<List<Post>> findAll() {
@@ -30,9 +33,17 @@ public class PostResource {
 		return ResponseEntity.ok(service.findBy(id));
 	}
 
-	@GetMapping(value = "/title")
-	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "q", defaultValue = "") String q) {
-		q = URL.decodeparam(q);
-		return ResponseEntity.ok(service.findByTitle(q));
+	@GetMapping(value = "/searchtitle")
+	public ResponseEntity<List<Post>> searchBy(@RequestParam(value = "title", defaultValue = "") String title) {
+		return ResponseEntity.ok(service.findByTitle(URL.decodeparam(title)));
+	}
+
+	@GetMapping(value = "/search")
+	public ResponseEntity<List<Post>> searchBy(@RequestParam(value = "text", defaultValue = "") String text,
+			@RequestParam(value = "min", defaultValue = "") String min,
+			@RequestParam(value = "max", defaultValue = "") String max) {
+
+		List<Post> posts = service.fullSearch(URL.decodeparam(text), URL.convertDate(min, time), URL.convertDate(max));
+		return ResponseEntity.ok(posts);
 	}
 }
